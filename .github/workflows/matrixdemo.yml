@@ -1,0 +1,16 @@
+name: matrix demo workflow
+on: push
+jobs:
+  nodejs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Use Node.js ${{ matrix.operating-system }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.operating-system }}
+      - run: npm ci
+      - run: npm test
