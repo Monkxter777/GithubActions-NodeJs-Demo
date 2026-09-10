@@ -2,7 +2,7 @@ name: matrix demo workflow
 on: push
 jobs:
   nodejs:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macos-latest]
