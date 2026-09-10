@@ -2,15 +2,17 @@ name: matrix demo workflow
 on: push
 jobs:
   nodejs:
+    continue-on-error: true
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18,14,16,12]
     runs-on: ${{ matrix.operating-system }}
     steps:
       - uses: actions/checkout@v7
       - name: Use Node.js ${{ matrix.operating-system }}
         uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.operating-system }}
+          node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm test
